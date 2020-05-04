@@ -69,11 +69,19 @@ public class DeserilziationSingletonTest {
 		//get SingleTon object
 		p1=Printer.getInstance();
 		//perform Serialization
-		//DeserilziationSingletonTest.serialize(p1);
+		/*DeserilziationSingletonTest.serialize(p1);
+		System.out.println(p1.hashCode());*/
+		try {
+	    //perform DeSerilization
 		p2=(Printer)DeserilziationSingletonTest.deSerialize();
 		System.out.println(p1.hashCode()+"   "+p2.hashCode());
+		System.out.println("p1==p2?"+(p1==p2));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+				
 		
-		System.out.println("(p1==p2?)"+(p1==p2));
 		
 
 	}

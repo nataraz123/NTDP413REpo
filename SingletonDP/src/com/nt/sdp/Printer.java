@@ -4,7 +4,7 @@ import com.nt.commons.CommonsUtil;
 
 public class Printer  extends  CommonsUtil {
 	//private static Printer INSTANCE=new Printer();  //eager Instantiation  (wrong pratice)
-	private static Printer INSTANCE1;
+	private static Printer INSTANCE;
 	private static final  long serialVersionUID=345L;
 	//private int a;
 	
@@ -34,13 +34,13 @@ public class Printer  extends  CommonsUtil {
 	
 	//static factory method
 	public  static  Printer  getInstance() {
-	   if(INSTANCE1==null) {			//1st NULL check
+	   if(INSTANCE==null) {			//1st NULL check
 			 synchronized (Printer.class) {
-				if(INSTANCE1==null) //2nd NULL check
-					INSTANCE1=new Printer();  //Lazy Instantiation  Good Pratice
+				if(INSTANCE==null) //2nd NULL check
+					INSTANCE=new Printer();  //Lazy Instantiation  Good Pratice
 			 }//synchroized
 	     }//if
-				return INSTANCE1;
+				return INSTANCE;
 			}//method
 	
 	//b.method
@@ -60,6 +60,24 @@ public class Printer  extends  CommonsUtil {
 			//return  INSTANCE;
 			return this;
 		}*/
+	
+	
+	/*   //solving DeSerialization Problem of singleton class (not recomanded)
+	 public    Object  readResolve() {
+	   System.out.println("Printer.readResolve()");
+	  // return  this;
+	   return  INSTANCE;
+	   
+	 }*/
+	 
+	 
+	   //solving DeSerialization Problem of singleton class (not recomanded)
+		 public    Object  readResolve() {
+			 System.out.println("Printer.readResolve()");
+		  throw new IllegalArgumentException("Printer do not want to support Deserilziation");
+		   
+		 }
+		
 	
 	
 
