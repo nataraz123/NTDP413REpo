@@ -6,7 +6,7 @@ public class Printer  extends  CommonsUtil {
 	//private static Printer INSTANCE=new Printer();  //eager Instantiation  (wrong pratice)
 	private static Printer INSTANCE;
 	private static final  long serialVersionUID=345L;
-	//private int a;
+	private static boolean flag=false;
 	
 	/*static {
 		INSTANCE=new Printer(); //eager Instantiation  (wrong pratice)
@@ -15,7 +15,9 @@ public class Printer  extends  CommonsUtil {
 	
 	//private constructor
 	private  Printer() {
-		//no op
+		if(flag==true)
+			  throw new IllegalArgumentException("Object already created...");
+		flag=true;
 		System.out.println("Printer:: 0-param constructor");
 	}
 	
@@ -57,8 +59,8 @@ public class Printer  extends  CommonsUtil {
 	/*//solving cloning problem of singleton  (not recomanded)
 		@Override
 		public   Object clone()throws CloneNotSupportedException {
-			//return  INSTANCE;
-			return this;
+			return  INSTANCE;
+			
 		}*/
 	
 	
@@ -71,7 +73,7 @@ public class Printer  extends  CommonsUtil {
 	 }*/
 	 
 	 
-	   //solving DeSerialization Problem of singleton class (not recomanded)
+	   //solving DeSerialization Problem of singleton class ( recomanded)
 		 public    Object  readResolve() {
 			 System.out.println("Printer.readResolve()");
 		  throw new IllegalArgumentException("Printer do not want to support Deserilziation");
